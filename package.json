@@ -1,0 +1,22 @@
+{
+  "name": "rms",
+  "version": "1.0.0",
+  "description": "Restaurant management system api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thenewcreation/rms_api.git"
+  },
+  "author": "Geleta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thenewcreation/rms_api/issues"
+  },
+  "homepage": "https://github.com/thenewcreation/rms_api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
