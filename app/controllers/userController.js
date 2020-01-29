@@ -1,12 +1,17 @@
-var User = require('../models/user')
 var userService = require('../services/user')
-module.exports.login = function(req,res){
-    res.json('login')
+
+module.exports.login = async function(req,res){
+    var id = req.body.id
+    var password = req.body.password
+    var user = await userService.authenticate(id, password)
+    res.json(user)
 }
+
 module.exports.getUsers = async function(req,res){
     var users = await userService.findAllUsers()
     res.json(users)
 }
+
 module.exports.getUser = async function(req,res){
     var id = req.body.id
     var user = await userService.findUserById(id)
