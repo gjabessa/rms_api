@@ -1,5 +1,6 @@
 var User = require('../models/user')
 var jwt = require('jsonwebtoken')
+var string = require('../../constants/strings')
 
 module.exports.findUserById = function(id){
     var user = new Promise((resolve,reject)=>{
@@ -10,7 +11,7 @@ module.exports.findUserById = function(id){
     }).then(function(data){
         return {success:true,message:data}
     },function(err){
-        return {success:false,message:'Something went wrong with finding user',error:err}
+        return {success:false,message:string.errors.FIND_USER_ERROR,error:err}
     })
 
     return user
@@ -31,7 +32,7 @@ module.exports.authenticate = function(id,password){
             return {success:false,message:'Incorrect credentials'};
         }
     },function(err){
-        return {success:false,message:'Something went wrong with authentication',error:err}
+        return {success:false,message:string.errors.AUTHENTICATION_ERROR,error:err}
     })
 
     return user
@@ -45,7 +46,7 @@ module.exports.findAllUsers = function(){
     }).then(function(data){
         return {success:true,message:data}
     },function(err){
-        return {success:false,message:'Something went wrong with finding users',error:err}
+        return {success:false,message:string.errors.FIND_USERS_ERROR,error:err}
     })
     return users
 }
@@ -69,7 +70,7 @@ module.exports.registerUser = function(body){
     }).then(function(data){
         return {success:true,message:data}
     },function(err){
-        return {success:false,message:'Something went wrong with registration',error:err}
+        return {success:false,message:string.errors.REGISTRATION_ERROR,error:err}
     })  
 
     return registration
