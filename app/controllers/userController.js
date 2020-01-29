@@ -3,12 +3,12 @@ var validationService = require('../services/validator')
 var strings = require('../../constants/strings')
 
 module.exports.login = async function(req,res){
-    var id = req.body.id
+    var username = req.body.username
     var password = req.body.password
     try{
-        var validation = await validationService.check_existence({username:id,password:password});
+        var validation = await validationService.check_existence({username:username,password:password});
         if(validation.success){
-            var user = await userService.authenticate(id, password)
+            var user = await userService.authenticate(username, password)
             res.json(user)
         } else {
             res.json(validation)
@@ -47,7 +47,7 @@ module.exports.getUser = async function(req,res){
 
 module.exports.register = async function(req,res){
     try{
-        var validation = await validationService.check_existence({phone:phone,password:password});
+        var validation = await validationService.check_existence({username:username,phone:phone,password:password});
         if(validation.success){
             var userRegistration = await userService.registerUser(req.body)
             res.json(userRegistration)
@@ -65,9 +65,18 @@ module.exports.password_reset = function(req,res){
     res.json('password reset')
 }
 
-module.exports.check_registered = function(req,res){
+module.exports.check_registered = async function(req,res){
     //check if user is registered
     var id = req.body.id
-    var isRegistered = userService.checkRegistered(id)
-    res.json(isRegistered)
+    try{
+        var validation = await validationService.check_existence({id:id});
+        if(validation.success){
+            var isRegistered = await userService.checkRegistered(id)
+            res.json(isRegistered)
+        } else {
+            res.json(validation)
+        }
+    } catch {
+        res.json({success:false,message:strings.errors.ERROR_CHECKING_REGISTERED})
+    }
 }

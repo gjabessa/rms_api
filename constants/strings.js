@@ -7,6 +7,7 @@ var REGISTRATION_ERROR = 'Something went wrong with registration'
 var AUTHENTICATION_ERROR ='Something went wrong with authentication'
 var AUTHORIZATION_ERROR ='Something went wrong with authorization'
 var LOGIN_ERROR = 'Something went wrong with login'
+var ERROR_CHECKING_REGISTERED = 'Something went wrong while checking'
 
 const UNAUTHORIZED = 401
 
@@ -16,7 +17,8 @@ module.exports.errors = {
     REGISTRATION_ERROR,
     AUTHENTICATION_ERROR,
     LOGIN_ERROR,
-    AUTHORIZATION_ERROR
+    AUTHORIZATION_ERROR,
+    ERROR_CHECKING_REGISTERED
 }
 
 module.exports.error_codes = {

@@ -20,9 +20,9 @@ module.exports.findUserById = function(id){
     
 }
 
-module.exports.authenticate = function(id,password){
+module.exports.authenticate = function(username,password){
     var user = new Promise((resolve,reject)=>{
-        User.findOne({_id:id,password:password},function(err,user){
+        User.findOne({name:username,password:password},function(err,user){
             if (err) reject(err)
             resolve(user);
         })
@@ -75,7 +75,7 @@ module.exports.findAllUsers = function(){
 module.exports.registerUser = function(body){
     var user = new User(
         {
-            name: body.name,
+            username: body.username,
             phone: body.phone,
             password: body.password
         }
@@ -99,9 +99,12 @@ module.exports.registerUser = function(body){
 
 module.exports.checkRegistered = async function(id){
     var user = await this.findUserById(id);
-    if(!!user){
-        return true
-    } else {
-        return false
+    if(user.success){
+        if(!!user.message){
+            return true
+        } else {
+            return false
+        }
     }
+    
 }
