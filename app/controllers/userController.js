@@ -47,6 +47,9 @@ module.exports.getUser = async function(req,res){
 
 module.exports.register = async function(req,res){
     try{
+        var username = req.body.username
+        var password = req.body.password
+        var phone = req.body.phone
         var validation = await validationService.check_existence({username:username,phone:phone,password:password});
         if(validation.success){
             var userRegistration = await userService.registerUser(req.body)

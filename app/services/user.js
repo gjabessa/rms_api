@@ -22,11 +22,12 @@ module.exports.findUserById = function(id){
 
 module.exports.authenticate = function(username,password){
     var user = new Promise((resolve,reject)=>{
-        User.findOne({name:username,password:password},function(err,user){
+        User.findOne({username:username,password:password},function(err,user){
             if (err) reject(err)
             resolve(user);
         })
     }).then(function(data){
+        console.log(data)
         if(!!data){
             var token = jwt.sign({ _id:data._id }, 'shhhhh')
             return {success:true,message:{user:data,token:token}}
